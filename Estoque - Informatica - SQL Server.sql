@@ -133,7 +133,8 @@ JOIN AtivosFixos AS af ON e.id = af.id_equipamento;
 -- consulta de itens dos colaboradores
 CREATE VIEW ConsultarItensAlocados AS
 SELECT 
-    c.id, c.nome + ' ' + c.sobrenome AS colaborador,
+    c.id, 
+    CONCAT(c.nome + ' ' + c.sobrenome) AS colaborador,
     e.nome_equipamento,
     ia.quantidade,
     ia.data_alocacao
@@ -146,7 +147,7 @@ JOIN Equipamentos e ON ia.id_equipamento = e.id;
 CREATE VIEW ConsultarAtivosAlocados AS
 SELECT 
     c.id, 
-    c.nome + ' ' + c.sobrenome AS colaborador,
+    CONCAT(c.nome + ' ' + c.sobrenome) AS colaborador,
     af.ativo_fixo,
     aa.data_alocacao
 FROM AtivosAlocados aa
