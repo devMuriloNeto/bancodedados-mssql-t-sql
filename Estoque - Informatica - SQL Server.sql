@@ -159,7 +159,7 @@ SELECT * FROM StatusAtivoFixo;
 
 SELECT * FROM ConsultarItensAlocados;
 
-SELECT * FROM ItensAlocados;
+SELECT * FROM ConsultarAtivosAlocados;
 
 
 
