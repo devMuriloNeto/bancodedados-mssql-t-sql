@@ -119,15 +119,18 @@ VALUES
 (6, 6), (6, 13),  -- Murilo
 (7, 7), (7, 14);  -- Jose
 
-ALTER TABLE AtivosFixos                        -- inserindo a tabela de status dos ativos fixos
+-- inserir a tabela de status dos ativos fixos
+ALTER TABLE AtivosFixos                        
 ADD status VARCHAR(15) DEFAULT 'Disponível' 
 CHECK (status IN ('Disponível', 'Em uso'));
 
-UPDATE AtivosFixos                             -- classificando itens como 'Em uso'
+-- classificar itens como 'Em uso'
+UPDATE AtivosFixos                             
 SET status = 'Em uso' 
 WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ,11 ,12 ,13 ,14);
 
-UPDATE AtivosFixos                             -- atualizando status de itens que ja estavam na tabela
+-- reclassificar status de itens que ja estavam na tabela
+UPDATE AtivosFixos                             
 SET status = 'Disponível' 
 WHERE status IS NULL;
 
@@ -168,7 +171,6 @@ LEFT JOIN AtivosAlocados AS aa ON af.id = aa.id_ativo_fixo
 LEFT JOIN Colaboradores AS c ON aa.id_colaborador = c.id;
 
 -- executar as views
-
 SELECT * FROM StatusAtivoFixo;
 
 SELECT * FROM ConsultarItensAlocados;
