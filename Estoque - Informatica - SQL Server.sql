@@ -1,18 +1,18 @@
--- criando um database
+-- criar o database
 CREATE DATABASE Informatica;
 
 USE Informatica;
 
--- criandoo as tabelas
+-- criar as tabelas
 
--- criando a tabela de Cargos
+-- criar a tabela de Cargos
 CREATE TABLE Cargos (
     id INT NOT NULL IDENTITY(1,1),
     nome_cargo VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
 
--- criando a tabela de Colaboradores
+-- criar a tabela de Colaboradores
 CREATE TABLE Colaboradores (
     id INT NOT NULL IDENTITY(1,1),
     nome VARCHAR(255) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE Colaboradores (
     PRIMARY KEY (id)
 );
 
--- criando a tabela de equipamentos
+-- criar a tabela de equipamentos
 CREATE TABLE Equipamentos (
     id INT NOT NULL IDENTITY(1,1),
     nome_equipamento VARCHAR(255) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE Equipamentos (
     PRIMARY KEY (id)
 );
 
--- criando a tabela de Ativos Fixos
+-- criar a tabela de Ativos Fixos
 CREATE TABLE AtivosFixos (
     id INT NOT NULL IDENTITY(1,1),
     id_equipamento INT NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE AtivosFixos (
     FOREIGN KEY (id_equipamento) REFERENCES Equipamentos(id)
 ); 
 
--- realizando os inserts nas tabelas
+-- realizar os inserts nas tabelas
 
 INSERT INTO Cargos (nome_cargo)
 VALUES 
@@ -60,14 +60,24 @@ VALUES
   (2, 'AF-008'), (2, 'AF-009'), (2, 'AF-010'), (2, 'AF-011'), (2, 'AF-012'), (2, 'AF-013'), (2, 'AF-014'),
   (2, 'AF-015');
 
- -- validando tabelas
+ -- validar tabelas
  
 SELECT * FROM Cargos;
+
 SELECT * FROM Colaboradores;
+
 SELECT * FROM Equipamentos;
+
 SELECT * FROM AtivosFixos;
 
--- alocando itens para os colaboradores
+-- consultar colaborador e cargo
+
+SELECT CONCAT(co.nome, + ' ' + co.sobrenome), co.id_cargo, ca.nome_cargo
+FROM Colaboradores as co
+JOIN Cargos ca ON co.id_cargo = ca.id;
+
+
+-- alocar itens para os colaboradores
 
 CREATE TABLE ItensAlocados (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -122,15 +132,15 @@ SET status = 'Disponível'
 WHERE status IS NULL;
 
 
--- criando as views para consultas
+-- criar as views para consultas
 
--- consulta de status dos ativos
+-- consultar de status dos ativos
 CREATE VIEW StatusAtivoFixo as
 SELECT e.id, e.nome_equipamento, af.ativo_fixo, af.status
 FROM equipamentos AS e
 JOIN AtivosFixos AS af ON e.id = af.id_equipamento;
  
--- consulta de itens dos colaboradores
+-- consultar de itens dos colaboradores
 CREATE VIEW ConsultarItensAlocados AS
 SELECT 
     c.id, 
@@ -143,24 +153,24 @@ JOIN Colaboradores c ON ia.id_colaborador = c.id
 JOIN Equipamentos e ON ia.id_equipamento = e.id;
 
 
--- consulta dos ativos fixos dos colaboradores
+-- consultar dos ativos fixos dos colaboradores
 CREATE VIEW ConsultarAtivosAlocados AS
 SELECT 
-    c.id, 
-    CONCAT(c.nome + ' ' + c.sobrenome) AS colaborador,
-    af.ativo_fixo,
-    aa.data_alocacao
-FROM AtivosAlocados aa
-JOIN Colaboradores c ON aa.id_colaborador = c.id
-JOIN AtivosFixos af ON aa.id_ativo_fixo = af.id;
+    e.id, 
+    e.nome_equipamento, 
+    e.tipo,  -- Tipo do equipamento (Notebook, Monitor etc.)
+    af.ativo_fixo, 
+    af.status, 
+    CONCAT(c.nome, ' ', c.sobrenome) AS colaborador -- Nome do colaborador que está com o ativo
+FROM Equipamentos AS e
+JOIN AtivosFixos AS af ON e.id = af.id_equipamento
+LEFT JOIN AtivosAlocados AS aa ON af.id = aa.id_ativo_fixo
+LEFT JOIN Colaboradores AS c ON aa.id_colaborador = c.id;
 
--- executando as views
+-- executar as views
 
 SELECT * FROM StatusAtivoFixo;
 
 SELECT * FROM ConsultarItensAlocados;
 
 SELECT * FROM ConsultarAtivosAlocados;
-
-
-
