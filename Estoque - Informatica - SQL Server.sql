@@ -134,13 +134,13 @@ WHERE status IS NULL;
 
 -- criar as views para consultas
 
--- consultar de status dos ativos
+-- consultar status dos ativos
 CREATE VIEW StatusAtivoFixo as
 SELECT e.id, e.nome_equipamento, af.ativo_fixo, af.status
 FROM equipamentos AS e
 JOIN AtivosFixos AS af ON e.id = af.id_equipamento;
  
--- consultar de itens dos colaboradores
+-- consultar itens dos colaboradores
 CREATE VIEW ConsultarItensAlocados AS
 SELECT 
     c.id, 
@@ -153,7 +153,7 @@ JOIN Colaboradores c ON ia.id_colaborador = c.id
 JOIN Equipamentos e ON ia.id_equipamento = e.id;
 
 
--- consultar dos ativos fixos dos colaboradores
+-- consultar ativos fixos dos colaboradores
 CREATE VIEW ConsultarAtivosAlocados AS
 SELECT 
     e.id, 
