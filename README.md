@@ -1,6 +1,6 @@
 # 📦 Sistema de Controle de Estoque de Equipamentos de TI
 
-Este repositório apresenta um projeto prático desenvolvido em **SQL e T-SQL (Microsoft SQL Server)**, inspirado em cenários reais de rotina em TI. O sistema simula o controle de ativos fixos e itens comuns dentro de um ambiente corporativo.
+Este repositório apresenta um projeto prático desenvolvido em **MySQL**, inspirado em cenários reais de rotina em TI. O sistema simula o controle de ativos fixos e itens comuns dentro de um ambiente corporativo.
 
 ## 📁 Estrutura do Banco de Dados
 
