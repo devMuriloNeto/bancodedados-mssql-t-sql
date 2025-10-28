@@ -1,4 +1,4 @@
-# <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" height="40" alt="microsoftsqlserver logo"  /> Banco de dados - MSSQL / T-SQL
+# Banco de dados - MSSQL / T-SQL <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" height="27" alt="microsoftsqlserver logo"  />
 
 Este repositório apresenta um projeto prático desenvolvido em **SQL Server e T-SQL**, inspirado em cenários reais de rotina em TI. O sistema simula o controle de ativos fixos e itens comuns dentro de um ambiente corporativo.
 
